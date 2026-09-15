@@ -8,11 +8,18 @@ interface Props {
 }
 
 const { rutaActual = '/' } = Astro.props;
+
+const resolverRuta = (path: string) => {
+  if (path.startsWith('http') || path.startsWith('#') || path.startsWith('mailto:')) return path;
+  const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${baseUrl}${cleanPath}`;
+};
 ---
 
 <header class="navbar">
   <div class="contenedor navbar__contenedor">
-    <a href="/" class="navbar__logo-enlace" aria-label="Ir a la página de inicio de Kivana">
+    <a href={resolverRuta('/')} class="navbar__logo-enlace" aria-label="Ir a la página de inicio de Kivana">
       <Image 
         src={logoImagen} 
         alt="Logo de Kivana - Organiza lo que importa" 
@@ -38,19 +45,23 @@ const { rutaActual = '/' } = Astro.props;
 
     <nav class="navbar__navegacion" id="navegacion-principal" aria-label="Navegación principal">
       <ul class="navbar__lista">
-        {enlacesNavegacion.map((enlace) => (
-          <li class="navbar__item">
-            <a 
-              href={enlace.ruta} 
-              class={`navbar__enlace ${rutaActual === enlace.ruta ? 'navbar__enlace--activo' : ''}`}
-              aria-current={rutaActual === enlace.ruta ? 'page' : undefined}
-              aria-label={enlace.descripcionNav || `Navegar a la página de ${enlace.etiqueta}`}
-              title={enlace.descripcionNav || `Navegar a la página de ${enlace.etiqueta}`}
-            >
-              {enlace.etiqueta}
-            </a>
-          </li>
-        ))}
+        {enlacesNavegacion.map((enlace) => {
+          const rutaFinal = resolverRuta(enlace.ruta);
+          const esActivo = rutaActual === enlace.ruta;
+          return (
+            <li class="navbar__item">
+              <a 
+                href={rutaFinal} 
+                class={`navbar__enlace ${esActivo ? 'navbar__enlace--activo' : ''}`}
+                aria-current={esActivo ? 'page' : undefined}
+                aria-label={enlace.descripcionNav || `Navegar a la página de ${enlace.etiqueta}`}
+                title={enlace.descripcionNav || `Navegar a la página de ${enlace.etiqueta}`}
+              >
+                {enlace.etiqueta}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   </div>

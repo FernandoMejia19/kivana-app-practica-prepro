@@ -20,6 +20,13 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://kivana.app');
 const tituloCompleto = titulo.includes('Kivana') ? titulo : `${titulo} | Kivana - Organiza lo que importa`;
+
+const resolverRuta = (path: string) => {
+  if (path.startsWith('http') || path.startsWith('#') || path.startsWith('mailto:')) return path;
+  const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${baseUrl}${cleanPath}`;
+};
 ---
 
 <!DOCTYPE html>
@@ -28,7 +35,7 @@ const tituloCompleto = titulo.includes('Kivana') ? titulo : `${titulo} | Kivana 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--link rel="icon" type="image/svg+xml" href="/fvicon.pg" /--->
-    <link rel="icon" type="png" href="/fvicon.png" />
+    <link rel="icon" type="png" href={resolverRuta('/fvicon.png')} />
     <meta name="generator" content={Astro.generator} />
 
     <!-- URL Canónica -->
@@ -54,8 +61,8 @@ const tituloCompleto = titulo.includes('Kivana') ? titulo : `${titulo} | Kivana 
     <meta property="twitter:image" content={new URL(imagenOG, Astro.site || 'https://kivana.app')} />
 
     <!-- Precarga de Fuentes Locales -->
-    <link rel="preload" href="/fonts/Fredoka-Bold.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="/fonts/NunitoSans-Variable.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href={resolverRuta('/fonts/Fredoka-Bold.ttf')} as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href={resolverRuta('/fonts/NunitoSans-Variable.ttf')} as="font" type="font/ttf" crossorigin />
   </head>
   <body>
     <a href="#contenido-principal" class="solo-lectores enlace-salto">

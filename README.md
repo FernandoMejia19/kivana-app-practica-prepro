@@ -161,6 +161,39 @@ Para mantener una estructura consistente:
 
 ---
 
+## Deploy en GitHub Pages
+
+El proyecto cuenta con integración continua configurada mediante **GitHub Actions** para desplegarse automáticamente en GitHub Pages.
+
+### 1. Configuración de variables
+En `astro.config.mjs`, actualiza únicamente estos dos valores con los de tu cuenta y repositorio:
+
+```javascript
+const GITHUB_USERNAME = "FernandoMejia19";
+const GITHUB_REPOSITORY = "kivana-app-practica-prepro";
+```
+
+### 2. Primer Push a GitHub
+Sube tus cambios a la rama principal `main`:
+
+```bash
+git add .
+git commit -m "chore: configure GitHub Pages deployment"
+git push origin main
+```
+
+### 3. Configuración en GitHub
+1. Dirígete a tu repositorio en GitHub.
+2. Ve a **Settings** → **Pages**.
+3. En **Build and deployment** → **Source**, selecciona **GitHub Actions**.
+
+### 4. Publicación y URL
+- GitHub Actions ejecutará automáticamente el workflow `.github/workflows/deploy.yml`.
+- Al finalizar, el sitio se publicará en: `https://<GITHUB_USERNAME>.github.io/<GITHUB_REPOSITORY>/`
+- Cada nuevo `git push origin main` actualizará automáticamente el sitio en vivo.
+
+---
+
 ## Estado del proyecto
 
 Proyecto desarrollado durante las **prácticas preprofesionales** como parte del desarrollo del sitio web público de Kivana.

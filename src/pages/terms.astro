@@ -1,0 +1,53 @@
+---
+import PlantillaBase from '@plantillas/PlantillaBase.astro';
+---
+
+<PlantillaBase 
+  titulo="Términos y Condiciones"
+  descripcion="Términos y condiciones de uso del servicio y la aplicación Kivana."
+  rutaActual="/terms"
+>
+  <section class="seccion seccion--blanca">
+    <div class="contenedor contenedor-legal">
+      <h2 class="legal-titulo">Términos y Condiciones</h2>
+      
+    </div>
+  </section>
+</PlantillaBase>
+
+<style>
+  .seccion--blanca {
+    background-color: var(--color-blanco);
+  }
+
+  .contenedor-legal {
+    max-width: 800px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .legal-titulo {
+    font-size: 2.5rem;
+    color: var(--color-azul);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-fecha {
+    font-size: 0.9rem;
+    color: rgba(var(--color-azul-rgb), 0.6);
+    margin-bottom: 2.5rem;
+  }
+
+  .legal-contenido h2 {
+    font-size: 1.4rem;
+    color: var(--color-azul);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-contenido p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+</style>

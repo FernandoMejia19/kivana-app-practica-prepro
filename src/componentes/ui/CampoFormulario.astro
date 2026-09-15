@@ -1,0 +1,122 @@
+---
+interface Props {
+  id: string;
+  etiqueta: string;
+  tipo?: 'text' | 'email' | 'textarea';
+  placeholder?: string;
+  requerido?: boolean;
+  filas?: number;
+}
+
+const {
+  id,
+  etiqueta,
+  tipo = 'text',
+  placeholder = '',
+  requerido = true,
+  filas = 4
+} = Astro.props;
+
+const esAreaTexto = tipo === 'textarea';
+---
+
+<div class="formulario__campo">
+  <label for={id} class="formulario__etiqueta">
+    {etiqueta} {requerido && <span class="formulario__requerido" aria-hidden="true">*</span>}
+  </label>
+
+  {esAreaTexto ? (
+    <textarea
+      id={id}
+      name={id}
+      class="formulario__textarea"
+      placeholder={placeholder}
+      required={requerido}
+      rows={filas}
+    ></textarea>
+  ) : (
+    <input
+      type={tipo}
+      id={id}
+      name={id}
+      class="formulario__input"
+      placeholder={placeholder}
+      required={requerido}
+    />
+  )}
+
+  <span class="formulario__error" id={`${id}-error`} aria-live="polite"></span>
+</div>
+
+<style>
+  .formulario__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .formulario__etiqueta {
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #123B56;
+  }
+
+  .formulario__requerido {
+    color: #E98A76;
+    margin-left: 2px;
+  }
+
+  .formulario__input,
+  .formulario__textarea {
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.975rem;
+    padding: 0.85rem 1.15rem;
+    border-radius: 12px;
+    border: 1.5px solid #CFE0E1;
+    background-color: #FFFFFF;
+    color: #123B56;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    width: 100%;
+    box-shadow: inset 0 1px 2px rgba(18, 59, 86, 0.02);
+  }
+
+  .formulario__input::placeholder,
+  .formulario__textarea::placeholder {
+    color: #8FA3B0;
+    opacity: 0.9;
+  }
+
+  .formulario__input:focus,
+  .formulario__textarea:focus {
+    outline: none;
+    border-color: #69B3A5;
+    box-shadow: 0 0 0 3px rgba(105, 179, 165, 0.25);
+    background-color: #FFFFFF;
+  }
+
+  .formulario__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .formulario__error {
+    font-size: 0.85rem;
+    color: #E98A76;
+    font-weight: 600;
+    min-height: 1.2rem;
+    display: none;
+    margin-top: 0.15rem;
+  }
+
+  .formulario__campo--invalido .formulario__input,
+  .formulario__campo--invalido .formulario__textarea {
+    border-color: #E98A76;
+    background-color: rgba(233, 138, 118, 0.04);
+  }
+
+  .formulario__campo--invalido .formulario__error {
+    display: block;
+  }
+</style>

@@ -1,0 +1,252 @@
+---
+import PlantillaBase from '@plantillas/PlantillaBase.astro';
+import ItemPregunta from '@componentes/ui/ItemPregunta.astro';
+import Boton from '@componentes/comunes/Boton.astro';
+import { listaPreguntasFrecuentes } from '@datos/preguntas';
+import { Image } from 'astro:assets';
+
+import mamaDinoImg from '@assets/images/FAQ/hero.webp';
+
+const faqProducto = listaPreguntasFrecuentes.filter(item => item.categoria === 'producto');
+const faqKidos = listaPreguntasFrecuentes.filter(item => item.categoria === 'kidos');
+const faqFamilia = listaPreguntasFrecuentes.filter(item => item.categoria === 'familia');
+---
+
+<PlantillaBase 
+  titulo="Preguntas Frecuentes (FAQ)"
+  descripcion="Encuentra respuestas rápidas sobre Kivana, la experiencia Kidos y la gestión de la familia privada."
+  rutaActual="/faq"
+>
+  <!-- HERO -->
+  <section class="seccion hero-faq">
+    <div class="contenedor">
+      <div class="hero-faq__visual">
+        <Image 
+          src={mamaDinoImg} 
+          alt="Dinosaurio mamá resolviendo dudas" 
+          class="hero-faq__imagen"
+          width={380}
+          height={380}
+          loading="eager"
+        />
+      </div>
+      <div class="hero-faq__contenido">
+        <h2 class="hero__titulo">Preguntas frecuentes</h2>
+        <p class="hero__descripcion">
+          Resolvemos tus dudas sobre Kivana, Kidos y cómo funciona la familia privada.
+        </p>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- ACORDEONES POR CATEGORÍA CON COLORES DISTINTIVOS -->
+  <section class="seccion seccion--blanca">
+    <div class="contenedor contenedor-faq">
+      <!-- CATEGORÍA 1: SOBRE KIVANA (MENTA) -->
+      <div class="faq-grupo faq-grupo--kivana">
+        <h2 class="faq-grupo__titulo">Sobre Kivana</h2>
+        <div class="faq-grupo__lista">
+          {faqProducto.map((item, index) => (
+            <ItemPregunta 
+              pregunta={item.pregunta} 
+              respuesta={item.respuesta}
+              abierto={index === 0}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- CATEGORÍA 2: SOBRE KIDOS (AMARILLO) -->
+      <div class="faq-grupo faq-grupo--kidos margin-top-lg">
+        <h2 class="faq-grupo__titulo">Sobre Kidos</h2>
+        <div class="faq-grupo__lista">
+          {faqKidos.map((item) => (
+            <ItemPregunta 
+              pregunta={item.pregunta} 
+              respuesta={item.respuesta} 
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- CATEGORÍA 3: FAMILIA Y PRIVACIDAD (CORAL) -->
+      <div class="faq-grupo faq-grupo--familia margin-top-lg">
+        <h2 class="faq-grupo__titulo">Familia y privacidad</h2>
+        <div class="faq-grupo__lista">
+          {faqFamilia.map((item) => (
+            <ItemPregunta 
+              pregunta={item.pregunta} 
+              respuesta={item.respuesta} 
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE CTA FINAL FAQ -->
+  <section class="seccion cta-final-faq">
+    <div class="contenedor texto-centrado">
+      <h2 class="cta-final-faq__titulo">¿Listo para organizar lo que importa?</h2>
+      <p class="cta-final-faq__descripcion">
+        Descubre cómo Kivana puede acompañar la rutina de tu familia.
+      </p>
+      <div class="cta-final-faq__acciones">
+        <Boton href="/funcionalidades" variante="azul">
+          Conoce Kivana
+        </Boton>
+        <Boton href="/contacto" variante="blanco">
+          Contactar
+        </Boton>
+      </div>
+    </div>
+  </section>
+</PlantillaBase>
+
+<style>
+  .hero-faq {
+    background-color: rgba(var(--color-menta-rgb), 0.08);
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-faq__contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 2.5rem;
+    background-color: #D9A01C;
+  }
+
+  @media (min-width: 768px) {
+    .hero-faq__contenedor {
+      flex-direction: row;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-faq__contenido {
+      flex: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-faq__visual {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .hero__titulo{
+    color: var(--color-coral);
+  }
+  .hero-faq .hero__titulo {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-faq .hero__descripcion {
+    font-size: 1.2rem;
+    max-width: 520px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-faq__imagen {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .seccion--blanca {
+    background-color: var(--color-blanco);
+  }
+
+  .contenedor-faq {
+    max-width: 860px;
+  }
+
+  .faq-grupo__titulo {
+    font-size: 1.5rem;
+    font-family: var(--fuente-titulos);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Colores distintivos por categoría */
+  .faq-grupo--kivana .faq-grupo__titulo {
+    color: var(--color-menta);
+    border-bottom: 3px solid var(--color-menta);
+  }
+
+  .faq-grupo--kidos .faq-grupo__titulo {
+    color: #fcb102;
+    border-bottom: 3px solid var(--color-amarillo);
+  }
+
+  .faq-grupo--familia .faq-grupo__titulo {
+    color: var(--color-coral);
+    border-bottom: 3px solid var(--color-coral);
+  }
+
+  .faq-grupo__lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .margin-top-lg {
+    margin-top: 3rem;
+  }
+
+  .margin-top-md {
+    margin-top: 1.5rem;
+  }
+
+  /* Bloque CTA Final FAQ */
+  .cta-final-faq {
+    background-color: #DDF0EA;
+    color: #123B56;
+    border-radius: var(--radio-lg);
+    margin: 3rem 1.5rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .cta-final-faq__titulo {
+    color: #123B56;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-final-faq__descripcion {
+    color: #123B56;
+    font-size: 1.15rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+  }
+
+  .cta-final-faq__acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 767px) {
+    .hero-faq__contenido,
+    .hero-faq__visual {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

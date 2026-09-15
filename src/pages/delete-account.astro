@@ -1,0 +1,78 @@
+---
+import PlantillaBase from '@plantillas/PlantillaBase.astro';
+import Boton from '@componentes/comunes/Boton.astro';
+---
+
+<PlantillaBase 
+  titulo="Eliminación de Cuenta y Datos"
+  descripcion="Instrucciones y mecanismo para solicitar la eliminación de cuenta y datos en Kivana."
+  rutaActual="/delete-account"
+>
+  <section class="seccion seccion--blanca">
+    <div class="contenedor contenedor-legal">
+      <h2 class="legal-titulo">Solicitud de Eliminación de Cuenta</h2>
+      
+    </div>
+  </section>
+</PlantillaBase>
+
+<style>
+  .seccion--blanca {
+    background-color: var(--color-blanco);
+  }
+
+  .contenedor-legal {
+    max-width: 800px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .legal-titulo {
+    font-size: 2.5rem;
+    color: var(--color-azul);
+    margin-bottom: 1rem;
+  }
+
+  .legal-descripcion {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .pasos-eliminacion h2 {
+    font-size: 1.4rem;
+    color: var(--color-azul);
+    margin-bottom: 1.5rem;
+  }
+
+  .opcion-card {
+    background-color: var(--color-crema);
+    padding: 1.75rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--sombra-suave);
+  }
+
+  .opcion-card h3 {
+    font-size: 1.2rem;
+    color: var(--color-azul);
+    margin-bottom: 0.75rem;
+  }
+
+  .opcion-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .margin-top-md {
+    margin-top: 1.5rem;
+  }
+
+  .margin-top-lg {
+    margin-top: 2.5rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+</style>

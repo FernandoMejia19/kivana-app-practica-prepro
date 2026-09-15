@@ -1,0 +1,138 @@
+---
+interface Props {
+  variante?: 'primario' | 'secundario' | 'outline' | 'kidos' | 'crema' | 'blanco' | 'coral' | 'menta' | 'azul';
+  href?: string;
+  tipo?: 'button' | 'submit';
+  clase?: string;
+  [key: string]: any;
+}
+
+const {
+  variante = 'primario',
+  href,
+  tipo = 'button',
+  clase = '',
+  ...restoProps
+} = Astro.props;
+
+const Elemento = href ? 'a' : 'button';
+const propsElemento = href ? { href, ...restoProps } : { type: tipo, ...restoProps };
+---
+
+<Elemento class={`boton boton--${variante} ${clase}`} {...propsElemento}>
+  <slot />
+</Elemento>
+
+<style>
+  .boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fuente-cuerpo);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.85rem 1.85rem;
+    border-radius: var(--radio-completo);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.2;
+    border: 2px solid transparent;
+  }
+
+  .boton:hover {
+    transform: translateY(-2px);
+  }
+
+  .boton:active {
+    transform: translateY(0);
+  }
+
+  /* Variante Primario / Azul (#123B56) */
+  .boton--primario,
+  .boton--azul {
+    background-color: #123B56;
+    color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(18, 59, 86, 0.28);
+  }
+
+  .boton--primario:hover,
+  .boton--azul:hover {
+    background-color: #0E2F45;
+    box-shadow: 0 6px 20px rgba(18, 59, 86, 0.38);
+  }
+
+  /* Variante Secundario / Menta (#69B3A5) */
+  .boton--secundario,
+  .boton--menta {
+    background-color: #69B3A5;
+    color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(105, 179, 165, 0.35);
+  }
+
+  .boton--secundario:hover,
+  .boton--menta:hover {
+    background-color: #58A294;
+    box-shadow: 0 6px 20px rgba(105, 179, 165, 0.45);
+  }
+
+  /* Variante Coral (#E98A76) */
+  .boton--coral {
+    background-color: #E98A76;
+    color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(233, 138, 118, 0.35);
+  }
+
+  .boton--coral:hover {
+    background-color: #D87763;
+    box-shadow: 0 6px 20px rgba(233, 138, 118, 0.45);
+  }
+
+  /* Variante Blanco (#FFFFFF) */
+  .boton--blanco {
+    background-color: #FFFFFF;
+    color: #123B56;
+    box-shadow: 0 4px 14px rgba(18, 59, 86, 0.1);
+  }
+
+  .boton--blanco:hover {
+    background-color: #F8F9FA;
+    color: #123B56;
+    box-shadow: 0 6px 18px rgba(18, 59, 86, 0.16);
+  }
+
+  /* Variante Kidos (Amarillo #FED17A) */
+  .boton--kidos {
+    background-color: var(--color-amarillo);
+    color: #123B56;
+    box-shadow: 0 4px 14px rgba(254, 209, 122, 0.4);
+  }
+
+  .boton--kidos:hover {
+    background-color: #f7c564;
+  }
+
+  /* Variante Crema (#FFF9F0) */
+  .boton--crema {
+    background-color: #FFF9F0;
+    color: #123B56;
+    box-shadow: 0 4px 14px rgba(18, 59, 86, 0.08);
+  }
+
+  .boton--crema:hover {
+    background-color: #FCE6BA;
+    color: #123B56;
+  }
+
+  /* Variante Outline */
+  .boton--outline {
+    background-color: transparent;
+    color: #123B56;
+    border-color: #123B56;
+  }
+
+  .boton--outline:hover {
+    background-color: #123B56;
+    color: #FFFFFF;
+  }
+</style>

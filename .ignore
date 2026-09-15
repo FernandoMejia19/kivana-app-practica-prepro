@@ -1,0 +1,11 @@
+# Build and Output directories
+dist/
+.astro/
+
+# Dependency directories
+node_modules/
+
+# Temporary files and caches
+.cache/
+.temp/
+tmp/

@@ -1,0 +1,90 @@
+---
+import Encabezado from '@componentes/comunes/Encabezado.astro';
+import PiePagina from '@componentes/comunes/PiePagina.astro';
+import '@estilos/global.css';
+import '@estilos/utilidades.css';
+
+interface Props {
+  titulo: string;
+  descripcion?: string;
+  imagenOG?: string;
+  rutaActual?: string;
+}
+
+const {
+  titulo,
+  descripcion = 'Kivana - Organiza lo que importa. La aplicación familiar para eventos, tareas, miembros y recuerdos en un solo lugar.',
+  imagenOG = '/images/og-kivana.png',
+  rutaActual = '/'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://kivana.app');
+const tituloCompleto = titulo.includes('Kivana') ? titulo : `${titulo} | Kivana - Organiza lo que importa`;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--link rel="icon" type="image/svg+xml" href="/fvicon.pg" /--->
+    <link rel="icon" type="png" href="/fvicon.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- URL Canónica -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Meta Etiquetas SEO -->
+    <title>{tituloCompleto}</title>
+    <meta name="title" content={tituloCompleto} />
+    <meta name="description" content={descripcion} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:image" content={new URL(imagenOG, Astro.site || 'https://kivana.app')} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={tituloCompleto} />
+    <meta property="twitter:description" content={descripcion} />
+    <meta property="twitter:image" content={new URL(imagenOG, Astro.site || 'https://kivana.app')} />
+
+    <!-- Precarga de Fuentes Locales -->
+    <link rel="preload" href="/fonts/Fredoka-Bold.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/NunitoSans-Variable.ttf" as="font" type="font/ttf" crossorigin />
+  </head>
+  <body>
+    <a href="#contenido-principal" class="solo-lectores enlace-salto">
+      Saltar al contenido principal
+    </a>
+
+    <Encabezado rutaActual={rutaActual} />
+
+    <main id="contenido-principal">
+      <slot />
+    </main>
+
+    <PiePagina />
+  </body>
+</html>
+
+<style>
+  .enlace-salto:focus {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+    width: auto;
+    height: auto;
+    padding: 1rem;
+    background-color: var(--color-amarillo);
+    color: var(--color-azul);
+    font-weight: bold;
+    border-radius: var(--radio-sm);
+    clip: auto;
+  }
+</style>

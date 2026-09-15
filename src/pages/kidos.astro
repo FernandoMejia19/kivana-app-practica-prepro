@@ -1,0 +1,517 @@
+---
+import PlantillaBase from '@plantillas/PlantillaBase.astro';
+import Boton from '@componentes/comunes/Boton.astro';
+import { Image } from 'astro:assets';
+
+import heroDinoImg from '@assets/images/Kidos/hero.webp';
+// Importación de ilustraciones para los 5 pasos
+import paso1Img from '@assets/images/Kidos/actividad.webp';
+import paso2Img from '@assets/images/Kidos/aprovacion.webp';
+import paso3Img from '@assets/images/Kidos/puntos.webp';
+import paso4Img from '@assets/images/Kidos/hero.webp';
+import paso5Img from '@assets/images/Kidos/recompensa.webp';
+
+import dinoMochilaImg from '@assets/images/Kidos/puntos.webp';
+import acompanamientoImg from '@assets/images/Kidos/aprovacion.webp';
+import fondoKidosSvg from '@assets/images/fondoKidos.svg';
+---
+
+<PlantillaBase 
+  titulo="Kidos - Gamificación y Hábitos"
+  descripcion="Descubre Kidos: la experiencia de Kivana que convierte las actividades cotidianas en progreso visible, huevos de dinosaurio y recompensas familiares."
+  rutaActual="/kidos"
+>
+  <!-- HERO -->
+  <section class="seccion hero-kidos">
+    <div class="contenedor grid-dos-columnas">
+      <div class="bloque-texto">
+        <h2 class="hero__titulo">¡Los grandes hábitos <span class="resaltar-coral">empiezan con pequeños logros!</span></h2>
+        <p class="hero__descripcion">
+          Kidos convierte actividades cotidianas en una aventura de progreso visible, huevos de dinosaurio y recompensas acordadas en familia.
+        </p>
+        <div class="hero-tarjetas-resumen">
+          <div class="tarjeta-resumen-item">
+            <h3>Actividades</h3>
+            <p>Completa actividades, consigue puntos y huevos</p>
+          </div>
+          <div class="tarjeta-resumen-item">
+            <h3>Recompensas</h3>
+            <p>Avanza hacia tus propias recompensas.</p>
+          </div>
+        </div>
+        <div class="hero__acciones">
+          <Boton href="/contacto" variante="kidos">
+            Conoce Kivana
+          </Boton>
+        </div>
+      </div>
+      <div class="bloque-visual">
+        <Image 
+          src={heroDinoImg} 
+          alt="Dinosaurio alegre celebrando con un huevo de recompensa Kidos" 
+          class="bloque-visual__imagen rotar-imagen"
+          width={480}
+          height={480}
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+  <!-- ¿QUÉ ES KIDOS? -->
+  <section class="seccion seccion--menta-suave seccion-canvas-kidos">
+    <canvas id="canvas-kidos" class="canvas-kidos" data-bg-src={fondoKidosSvg.src}></canvas>
+    <div class="contenedor meta fondo-kidos-contenido">
+      <div class="bloque-texto">
+        <h2 class="seccion__titulo__kidos">¿QUÉ ES KIDOS?</h2>
+      <p class="seccion__subtitulo">
+        Una aventura que crece con cada pequeño logro. Kidos transforma actividades y hábitos diarios en progreso visible. Los niños participan, completan actividades y avanzan; los padres validan sus logros y acompañan el proceso.
+      </p>
+      </div>
+      <div class="bloque-visual">
+        <Image 
+          src={dinoMochilaImg} 
+          alt="Dinosaurio pequeño con mochila avanzando en su ruta de tareas" 
+          class="bloque-visual__imagen rotar-imagen"
+          width={550}
+          height={550}
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+  <section class="seccion seccion--blanca">
+    <div class="contenedor texto-centrado">
+      <!-- FLUJO 5 PASOS CONSOLIDADO -->
+      <div class="contenedor grid-pasos">
+      <article class="paso-card">
+        <div class="paso-card__num">1</div>
+        <div class="paso-card__visual">
+          <Image src={paso1Img} alt="Actividades" class="paso-card__img" width={160} height={160} loading="lazy" />
+        </div>
+        <h3 class="paso-card__titulo">Actividades</h3>
+        <p class="paso-card__descripcion">Completa una actividad o hábito en tu día a día.</p>
+      </article>
+
+      <article class="paso-card">
+        <div class="paso-card__num">2</div>
+        <div class="paso-card__visual">
+          <Image src={paso2Img} alt="Validación" class="paso-card__img" width={160} height={160} loading="lazy" />
+        </div>
+        <h3 class="paso-card__titulo">Validación</h3>
+        <p class="paso-card__descripcion">Un padre valida el avance antes de continuar la aventura.</p>
+      </article>
+
+      <article class="paso-card">
+        <div class="paso-card__num">3</div>
+        <div class="paso-card__visual">
+          <Image src={paso3Img} alt="Puntos" class="paso-card__img" width={160} height={160} loading="lazy" />
+        </div>
+        <h3 class="paso-card__titulo">Puntos</h3>
+        <p class="paso-card__descripcion">Cada actividad validada suma progreso al perfil del niño.</p>
+      </article>
+
+      <article class="paso-card">
+        <div class="paso-card__num">4</div>
+        <div class="paso-card__visual">
+          <Image src={paso4Img} alt="Huevo" class="paso-card__img" width={160} height={160} loading="lazy" />
+        </div>
+        <h3 class="paso-card__titulo">Huevo</h3>
+        <p class="paso-card__descripcion">El progreso se convierte en huevos de dinosaurio.</p>
+      </article>
+
+      <article class="paso-card">
+        <div class="paso-card__num">5</div>
+        <div class="paso-card__visual">
+          <Image src={paso5Img} alt="Recompensa" class="paso-card__img" width={160} height={160} loading="lazy" />
+        </div>
+        <h3 class="paso-card__titulo">Recompensa</h3>
+        <p class="paso-card__descripcion">Usa tu recompensa acordada en familia para avanzar.</p>
+      </article>
+    </div>
+
+    <div class="grid-dos-columnas seccion">
+        <h2 class="bloque-texto__titulo">Tu progreso.
+          <br><span class="aventura__subtitulo">Tu aventura.</span></h2>
+        <p class="bloque-texto__descripcion">
+          Los niños participan activamente en sus metas diarias con motivación visual. Cada meta comienza con un pequeño esfuerzo. La familia define las recompensas y la cantidad de huevos necesaria para alcanzarlas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PARA PADRES: ACOMPAÑAMIENTO PARENTAL -->
+  <section class="seccion">
+    <div class="contenedor grid-dos-columnas grid-dos-columnas--reverso">
+      <div class="bloque-texto">
+        <h2 class="bloque-texto__titulo">Motivar no significa hacerlo por ellos.</h2>
+        <p class="bloque-texto__descripcion">
+          Los padres mantienen el control de la validación y acompañan el progreso de cada niño. Kidos acompaña, motiva y celebra cada paso de tus hijos garantizando un crecimiento positivo y seguro.
+        </p>
+      </div>
+      <div class="bloque-visual">
+        <Image 
+          src={acompanamientoImg} 
+          alt="Padre dinosaurio guiando el progreso de su hijo" 
+          class="bloque-visual__imagen"
+          width={450}
+          height={450}
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="seccion cta-final">
+    <div class="contenedor cta-final__contenedor">
+      <h2 class="cta-final__titulo">Cada pequeño logro cuenta.</h2>
+      <p class="cta-final__descripcion">
+        Acompaña cada pequeño paso y convierte las responsabilidades cotidianas en una aventura compartida.
+      </p>
+      <div class="cta-final__acciones">
+        <Boton href="/contacto" variante="azul">
+          Conoce Kivana
+        </Boton>
+        <Boton href="/contacto" variante="blanco">
+          Contactar
+        </Boton>
+      </div>
+    </div>
+  </section>
+</PlantillaBase>
+
+<style>
+  .hero-kidos {
+    /*background-color: rgba(var(--color-menta-rgb), 0.1);*/
+    background-color: var(--color-crema);
+  }
+
+  .hero__titulo {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__descripcion {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .hero__acciones {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .hero-tarjetas-resumen {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .rotar-imagen{
+    transform: scaleX(-1);
+  }
+  .tarjeta-resumen-item {
+    background-color: var(--color-blanco);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radio-md);
+    box-shadow: var(--sombra-suave);
+    flex: 1;
+    min-width: 180px;
+    border: 1px solid rgba(var(--color-azul-rgb), 0.05);
+  }
+
+  .tarjeta-resumen-item h3 {
+    font-size: 1rem;
+    color: var(--color-azul);
+    margin-bottom: 0.25rem;
+  }
+
+  .tarjeta-resumen-item p {
+    font-size: 0.875rem;
+    color: rgba(var(--color-azul-rgb), 0.8);
+    margin: 0;
+  }
+
+  .badge-kidos, .badge-submodulo {
+    display: inline-block;
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-azul);
+    background-color: var(--color-amarillo);
+    padding: 0.35rem 1rem;
+    border-radius: var(--radio-completo);
+    margin-bottom: 1.25rem;
+  }
+
+  .badge-submodulo {
+    background-color: var(--color-menta);
+    color: var(--color-blanco);
+  }
+
+  .grid-dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .meta {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .grid-dos-columnas {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grid-dos-columnas--reverso .bloque-texto {
+      order: 2;
+    }
+
+    .grid-dos-columnas--reverso .bloque-visual {
+      order: 1;
+    }
+  }
+
+  .bloque-visual__imagen {
+    width: 100%;
+    max-width: 660px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .seccion--blanca {
+    background-color: var(--color-blanco);
+  }
+
+  .seccion--menta-suave {
+    background-color: rgba(var(--color-menta-rgb), 0.18);
+  }
+
+  .seccion-canvas-kidos {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .canvas-kidos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .fondo-kidos-contenido {
+    position: relative;
+    z-index: 2;
+  }
+  .seccion__titulo__kidos{
+    color: var(--color-amarillo);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+  }
+  .seccion__subtitulo {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .5rem;
+    line-height: 1.6;
+    color: var(--color-crema);
+    text-align: center;
+  }
+
+  .flujo-titulo {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-azul);
+  }
+
+  .flujo-imagen {
+    width: 100%;
+    max-width: 960px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Grid de Pasos */
+  .grid-pasos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .grid-pasos {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid-pasos {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  .paso-card {
+    background-color: var(--color-blanco);
+    padding: 1.5rem 1.25rem;
+    border-radius: var(--radio-md);
+    box-shadow: var(--sombra-suave);
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(var(--color-azul-rgb), 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .paso-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-media);
+  }
+
+  .paso-card__num {
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-amarillo);
+    color: var(--color-azul);
+    font-family: var(--fuente-titulos);
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .paso-card__visual {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .paso-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .paso-card__titulo {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-azul);
+  }
+
+  .paso-card__descripcion {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: rgba(var(--color-azul-rgb), 0.8);
+  }
+
+  /* CTA Final (Idéntico visualmente al de Funcionalidades) */
+  .cta-final {
+    background-color: #DDF0EA;
+    color: #123B56;
+    text-align: center;
+    border-radius: var(--radio-lg);
+    margin: 3rem 1.5rem;
+  }
+
+  .cta-final__titulo {
+    color: #123B56;
+    margin-bottom: 1rem;
+  }
+
+  .cta-final__descripcion {
+    color: #123B56;
+    font-size: 1.2rem;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+  }
+
+  .cta-final__acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 767px) {
+    .hero-kidos .bloque-texto,
+    .bloque-texto {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero__acciones {
+      justify-content: center;
+    }
+
+    .hero-tarjetas-resumen {
+      justify-content: center;
+    }
+  }
+  .aventura__subtitulo{
+      color: var(--color-coral);
+    }
+  .resaltar-coral{
+    color: var(--color-coral)
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('canvas-kidos') as HTMLCanvasElement | null;
+  if (canvas && canvas.parentElement) {
+    const ctx = canvas.getContext('2d');
+    const bgSrc = canvas.dataset.bgSrc;
+
+    if (ctx) {
+      const parent = canvas.parentElement;
+      const bgImg = new Image();
+
+      const render = () => {
+        if (!ctx || !canvas) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (bgImg.complete && bgImg.naturalWidth !== 0) {
+          ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+        }
+      };
+
+      const resize = () => {
+        canvas.width = parent.offsetWidth;
+        canvas.height = parent.offsetHeight;
+        render();
+      };
+
+      if (bgSrc) {
+        bgImg.src = bgSrc;
+        bgImg.onload = () => {
+          render();
+        };
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+    }
+  }
+</script>

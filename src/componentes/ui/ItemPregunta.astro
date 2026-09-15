@@ -1,0 +1,105 @@
+---
+interface Props {
+  pregunta: string;
+  respuesta: string;
+  abierto?: boolean;
+}
+
+const { pregunta, respuesta, abierto = false } = Astro.props;
+---
+
+<details class="acordeon" open={abierto}>
+  <summary class="acordeon__resumen">
+    <span class="acordeon__pregunta">{pregunta}</span>
+    <span class="acordeon__icono" aria-hidden="true">+</span>
+  </summary>
+  <div class="acordeon__contenido">
+    <p class="acordeon__respuesta">{respuesta}</p>
+  </div>
+</details>
+
+<style>
+  .acordeon {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-md);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--sombra-suave);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    border: 1px solid rgba(var(--color-azul-rgb), 0.05);
+  }
+
+  .acordeon:hover {
+    box-shadow: var(--sombra-media);
+  }
+
+  .acordeon[open] {
+    box-shadow: var(--sombra-media);
+  }
+
+  .acordeon__resumen {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .acordeon__resumen::-webkit-details-marker {
+    display: none;
+  }
+
+  .acordeon__pregunta {
+    font-family: var(--fuente-titulos);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-azul);
+  }
+
+  .acordeon__icono {
+    font-family: var(--fuente-titulos);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-menta);
+    line-height: 1;
+    transition: transform 0.25s ease, color 0.25s ease;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(var(--color-menta-rgb), 0.12);
+    border-radius: 50%;
+  }
+
+  .acordeon[open] .acordeon__icono {
+    transform: rotate(45deg);
+    background-color: rgba(var(--color-coral-rgb), 0.15);
+    color: var(--color-coral);
+  }
+
+  .acordeon__contenido {
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px dashed rgba(var(--color-azul-rgb), 0.1);
+    animation: aparecer 0.25s ease;
+  }
+
+  .acordeon__respuesta {
+    font-size: 1rem;
+    color: rgba(var(--color-azul-rgb), 0.8);
+    line-height: 1.65;
+  }
+
+  @keyframes aparecer {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,236 @@
+---
+import { enlacesPiePagina } from '@datos/navegacion';
+import { Image } from 'astro:assets';
+import logoImagen from '@assets/logos/horizontal-tag.svg';
+
+const anoActual = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="contenedor footer__contenedor">
+    <div class="footer__marca">
+      <a href="/" aria-label="Ir a la página de inicio de Kivana">
+        <Image 
+          src={logoImagen} 
+          alt="Logo de Kivana" 
+          class="footer__logo" 
+          width={130} 
+          height={38}
+          loading="lazy"
+        />
+      </a>
+      <p class="footer__descripcion">
+        Una nueva forma de organizar, compartir y disfrutar la vida familiar.
+      </p>
+    </div>
+
+    <div class="footer__red">
+      <div class="footer__columna">
+        <h3 class="footer__titulo">Producto</h3>
+        <ul class="footer__lista">
+          {enlacesPiePagina.producto.map((item) => (
+            <li class="footer__item">
+              <a 
+                href={item.ruta} 
+                class="footer__enlace"
+                aria-label={item.descripcionNav || `Navegar a ${item.etiqueta}`}
+                title={item.descripcionNav || `Navegar a ${item.etiqueta}`}
+              >
+                {item.etiqueta}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer__columna">
+        <h3 class="footer__titulo">Kivana</h3>
+        <ul class="footer__lista">
+          {enlacesPiePagina.kivana.map((item) => (
+            <li class="footer__item">
+              <a 
+                href={item.ruta} 
+                class="footer__enlace"
+                aria-label={item.descripcionNav || `Navegar a ${item.etiqueta}`}
+                title={item.descripcionNav || `Navegar a ${item.etiqueta}`}
+              >
+                {item.etiqueta}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer__columna">
+        <h3 class="footer__titulo">Legal</h3>
+        <ul class="footer__lista">
+          {enlacesPiePagina.legal.map((item) => (
+            <li class="footer__item">
+              <a 
+                href={item.ruta} 
+                class="footer__enlace"
+                aria-label={item.descripcionNav || `Navegar a ${item.etiqueta}`}
+                title={item.descripcionNav || `Navegar a ${item.etiqueta}`}
+              >
+                {item.etiqueta}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer__columna">
+        <h3 class="footer__titulo">Síguenos</h3>
+        <ul class="footer__lista">
+          {enlacesPiePagina.redes.map((item) => (
+            <li class="footer__item">
+              <a 
+                href={item.ruta} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="footer__enlace"
+                aria-label={item.descripcionNav || `Ir a ${item.etiqueta}`}
+                title={item.descripcionNav || `Ir a ${item.etiqueta}`}
+              >
+                {item.etiqueta}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__inferior">
+    <div class="contenedor footer__inferior-contenedor">
+      <p class="footer__derechos">
+        © {anoActual} Kivana · Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-menta);
+    color: var(--color-crema);
+    padding-top: var(--espacio-xl);
+    margin-top: auto;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+  }
+
+  .footer__contenedor {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-bottom: var(--espacio-xl);
+  }
+
+  @media (min-width: 768px) {
+    .footer__contenedor {
+      grid-template-columns: 1.5fr 3fr;
+    }
+  }
+
+  .footer__marca {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  @media (max-width: 1024px) {
+    .footer__marca {
+      align-items: center;
+      text-align: center;
+      padding-bottom: 30px;
+      border-bottom: 2px solid rgba(22, 60, 80, 0.2);
+    }
+  }
+  .footer__logo {
+    object-fit: contain;
+    width: 130px;
+    height: auto;
+    background-color: var(--color-crema);
+    padding: 0.45rem;
+    border-radius: var(--radio-sm);
+  }
+
+  .footer__descripcion {
+    color: var(--color-crema);
+    font-size: 0.95rem;
+    max-width: 320px;
+    font-weight: 600;
+  }
+
+  .footer__red {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .footer__red {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .footer__columna {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer__titulo {
+    font-family: var(--fuente-titulos);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-amarillo);
+  }
+
+  .footer__lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer__enlace {
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.95rem;
+    color: var(--color-crema);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    align-self: flex-start;
+    transition: color 0.2s ease, font-weight 0.2s ease, border-bottom 0.2s ease;
+  }
+
+  .footer__enlace:hover,
+  .footer__enlace:focus-visible {
+    color: var(--color-amarillo);
+    font-weight: 700;
+    border-bottom: 2px solid var(--color-amarillo);
+  }
+
+  .footer__inferior {
+    border-top: 1px solid rgba(22, 60, 80, 0.2);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  .footer__inferior-contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer__derechos {
+    font-size: 0.875rem;
+    color: var(--color-crema);
+    text-align: center;
+    font-weight: 700;
+  }
+</style>

@@ -1,0 +1,37 @@
+/* Utilidades CSS BEM */
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho-maximo);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--padding-contenedor);
+  padding-right: var(--padding-contenedor);
+}
+
+.seccion {
+  padding-top: var(--espacio-xl);
+  padding-bottom: var(--espacio-xl);
+}
+
+@media (min-width: 1024px) {
+  .seccion {
+    padding-top: var(--espacio-xxl);
+    padding-bottom: var(--espacio-xxl);
+  }
+}
+
+.texto-centrado {
+  text-align: center;
+}
+
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
-const GITHUB_USERNAME = 'gabusleon';
-const GITHUB_REPOSITORY = 'kivanaApp-webpage';
+const GITHUB_USERNAME = 'FernandoMejia19';
+const GITHUB_REPOSITORY = 'kivana-app-practica-prepro';
 
 const esPaginaUsuario =
   GITHUB_REPOSITORY.toLowerCase() ===

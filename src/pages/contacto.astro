@@ -29,7 +29,7 @@ const resolverRuta = (path: string) => {
           Estamos para ayudarte, envíanos un mensaje y te responderemos tan pronto como sea posible.
         </p>
         <div class="hero-contacto__accion">
-          <Boton href={resolverRuta('/faq')} variante="kidos">
+          <Boton href='/faq' variante="kidos">
             Preguntas frecuentes
           </Boton>
         </div>
@@ -159,15 +159,15 @@ const resolverRuta = (path: string) => {
           </div>
         </a>
         
-        <a href="https://tiktok.com/@kivana_app" target="_blank" rel="noopener noreferrer" class="tarjeta-medio">
-          <div class="tarjeta-medio__icono tarjeta-medio__icono--tiktok" aria-hidden="true">
+        <a href="https://www.facebook.com/profile.php?id=61591219323181" target="_blank" rel="noopener noreferrer" class="tarjeta-medio">
+          <div class="tarjeta-medio__icono tarjeta-medio__icono--facebook" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
             </svg>
           </div>
           <div class="tarjeta-medio__info">
-            <h3 class="nombre__redes">TikTok</h3>
-            <p>@kivana_app</p>
+            <h3 class="nombre__redes">Facebook</h3>
+            <p>Kivana</p>
           </div>
         </a>
       </div>
@@ -445,15 +445,15 @@ const resolverRuta = (path: string) => {
   }
 
   .tarjeta-medio__icono--correo {
-    background-color: #163C50;
+    background-color: var(--color-coral);
   }
 
   .tarjeta-medio__icono--instagram {
-    background-color: #6BAD99;
+    background-color: var(--color-menta);
   }
 
-  .tarjeta-medio__icono--tiktok {
-    background-color: #E98C78;
+  .tarjeta-medio__icono--facebook {
+    background-color: var(--color-azul);
   }
 
   .tarjeta-medio__info h3 {

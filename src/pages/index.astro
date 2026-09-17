@@ -46,7 +46,7 @@ const resolverRuta = (path: string) => {
           Cada tarea, cada plan y cada pequeño logro pueden convertirse en una experiencia para toda la familia.
         </p>
         <div class="hero__acciones">
-          <Boton href={resolverRuta('/funcionalidades')} variante="kidos">
+          <Boton href='/funcionalidades' variante="kidos">
             Conoce Kivana
           </Boton>
         </div>
@@ -133,7 +133,7 @@ const resolverRuta = (path: string) => {
           Con Kidos, las actividades cotidianas se convierten en progreso, huevos y recompensas que motivan a los niños mientras los padres acompañan cada paso.
         </p>
         <div class="espacio-superior-lg">
-          <Boton href={resolverRuta('/kidos')} variante="primario">
+          <Boton href='/kidos' variante="primario">
             Descubre cómo funciona Kidos
           </Boton>
         </div>
@@ -470,6 +470,16 @@ const resolverRuta = (path: string) => {
     height: auto;
     border-radius: var(--radio-sm);
     margin-bottom: 1rem;
+    display: block;
+  }
+
+  @media (max-width: 767px) {
+    .pasos-card__imagen {
+      width: 90%;
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   .pasos-card__titulo {
@@ -527,6 +537,13 @@ const resolverRuta = (path: string) => {
     width: 100%;
     max-width: 310px;
     position: relative;
+  }
+
+  @media (max-width: 767px) {
+    .vistazo-pantalla {
+      max-width: 260px;
+      width: 85%;
+    }
   }
 
   @media (min-width: 768px) {

@@ -70,7 +70,7 @@ const resolverRuta = (path: string) => {
         <div class="tarjeta-contacto__derecha">
           <form 
             id="formulario-contacto" 
-            action="https://formspree.io/f/fercholkm19@gmail.com" 
+            action="https://formspree.io/f/mqpaagbq" 
             method="POST" 
             class="formulario-contacto"
             novalidate
@@ -108,13 +108,13 @@ const resolverRuta = (path: string) => {
               filas={4}
             />
             
-            <div class="formulario__estado" id="mensaje-estado" aria-live="polite"></div>
-            
             <div class="formulario__boton-wrapper">
               <Boton tipo="submit" variante="kidos" id="boton-enviar" clase="boton-pildora">
                 Enviar mensaje
               </Boton>
             </div>
+
+            <div class="formulario__estado" id="mensaje-estado" aria-live="polite"></div>
           </form>
         </div>
       </div>
@@ -353,27 +353,29 @@ const resolverRuta = (path: string) => {
   }
 
   .formulario__estado {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 1.25rem;
     font-family: var(--fuente-cuerpo);
-    font-weight: 700;
-    border-radius: 12px;
-    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 16px;
+    padding: 0.85rem 1.25rem;
     display: none;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(18, 59, 86, 0.08);
   }
 
   .formulario__estado--exito {
     display: block;
     background-color: #FFFFFF;
     color: #123B56;
-    border: 1px solid #FED17A;
+    border: 2px solid #FED17A;
   }
 
   .formulario__estado--error {
     display: block;
-    background-color: rgba(233, 138, 118, 0.2);
-    color: #FFFFFF;
-    border: 1px solid #E98A76;
+    background-color: #FFFFFF;
+    color: #C0392B;
+    border: 2px solid #E98C78;
   }
 
   /* OTROS MEDIOS DE CONTACTO */
@@ -480,45 +482,31 @@ const resolverRuta = (path: string) => {
   const form = document.getElementById('formulario-contacto') as HTMLFormElement | null;
   const estadoDiv = document.getElementById('mensaje-estado');
   const submitBtn = document.getElementById('boton-enviar') as HTMLButtonElement | null;
+  let timerOcultar: ReturnType<typeof setTimeout> | null = null;
 
   if (form && estadoDiv && submitBtn) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
-      // Limpiar estados previos
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Cancelar temporizador previo si existe
+      if (timerOcultar) {
+        clearTimeout(timerOcultar);
+        timerOcultar = null;
+      }
+
+      // Ocultar estados previos
       estadoDiv.className = 'formulario__estado';
       estadoDiv.style.display = 'none';
+      estadoDiv.textContent = '';
       
-      // Validar inputs
-      let esValido = true;
-      const campos = ['nombre', 'email', 'asunto', 'mensaje'];
-
-      campos.forEach(id => {
-        const input = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
-        const parent = input?.closest('.formulario__campo');
-        const errorSpan = document.getElementById(`${id}-error`);
-
-        if (input && parent && errorSpan) {
-          if (!input.value.trim()) {
-            esValido = false;
-            parent.classList.add('formulario__campo--invalido');
-            errorSpan.textContent = 'Este campo es obligatorio.';
-          } else if (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
-            esValido = false;
-            parent.classList.add('formulario__campo--invalido');
-            errorSpan.textContent = 'Introduce un correo electrónico válido.';
-          } else {
-            parent.classList.remove('formulario__campo--invalido');
-            errorSpan.textContent = '';
-          }
-        }
-      });
-
-      if (!esValido) return;
-
-      // Estado Enviando
+      // Estado Enviando: Cambiar texto y deshabilitar botón
+      const textoOriginal = submitBtn.textContent || 'Enviar mensaje';
       submitBtn.disabled = true;
-      const textoOriginal = submitBtn.textContent;
       submitBtn.textContent = 'Enviando...';
 
       try {
@@ -532,18 +520,29 @@ const resolverRuta = (path: string) => {
         });
 
         if (response.ok) {
+          // Éxito: Muestra mensaje y limpia el formulario
           estadoDiv.className = 'formulario__estado formulario__estado--exito';
-          estadoDiv.textContent = '✓ Mensaje enviado correctamente. Te responderemos tan pronto como sea posible.';
+          estadoDiv.textContent = '✓ Mensaje enviado correctamente. Te responderemos pronto.';
+          estadoDiv.style.display = 'block';
           form.reset();
         } else {
           throw new Error('Error al enviar el formulario.');
         }
       } catch (err) {
+        // Error: Muestra mensaje de error y conserva los datos del formulario
         estadoDiv.className = 'formulario__estado formulario__estado--error';
-        estadoDiv.textContent = 'No fue posible enviar el mensaje. Por favor inténtalo nuevamente.';
+        estadoDiv.textContent = '× No pudimos enviar tu mensaje. Inténtalo nuevamente.';
+        estadoDiv.style.display = 'block';
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = textoOriginal;
+
+        // Desaparecer automáticamente después de 6 segundos
+        timerOcultar = setTimeout(() => {
+          estadoDiv.style.display = 'none';
+          estadoDiv.textContent = '';
+          estadoDiv.className = 'formulario__estado';
+        }, 6000);
       }
     });
   }
